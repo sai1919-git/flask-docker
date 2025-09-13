@@ -2,7 +2,7 @@ pipeline{
   agent any
   environment{
       DOCKER_HUB="docker-cred-id"
-      IMAGE_NAME="sai604/docker-flask"
+      IMAGE_NAME="sai604/flask-docker"
       TAG="latest"
   }
   stages{
