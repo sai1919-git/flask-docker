@@ -13,7 +13,7 @@ pipeline{
     }
     }
     stage("build image"){
-    step{
+    steps {
       docker.build ("$IMAGE_NAME:$TAG")
     }
     }
