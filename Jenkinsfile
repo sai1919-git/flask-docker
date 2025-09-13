@@ -8,7 +8,7 @@ pipleline{
   stages{
     stage("checkout"){
     steps{
-      git https://github.com/sai1919-git/flask-docke
+      git https://github.com/sai1919-git/flask-docker.git
     }
     }
     stage("build image"){
