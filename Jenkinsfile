@@ -1,4 +1,4 @@
-pipleline{
+pipeline{
   agent any
   environment{
       DOCKER_HUB="docker-cred-id"
@@ -8,7 +8,7 @@ pipleline{
   stages{
     stage("checkout"){
     steps{
-      git https://github.com/sai1919-git/flask-docker.git
+      git url: https://github.com/sai1919-git/flask-docker.git
     }
     }
     stage("build image"){
@@ -19,9 +19,10 @@ pipleline{
     stage("push image"){
       steps{
         script{
-        docker.withregistry('https://index.docker.io/v1',"${DOCKER_HUB}")
+        docker.withRegistry('https://index.docker.io/v1',"${DOCKER_HUB}") {
         docker.build("${IMAGE_NAME}:${TAG}").push()
       }
+        }
     }
     }
     stage("running"){
@@ -29,7 +30,7 @@ pipleline{
          sh '''
                 docker stop flask-container || true
                 docker rm flask-container || true
-                docker run -d -p 5000:5000 --name flask-container ${IMAGE_NAME}:${IMAGE_TAG}
+                docker run -d -p 5000:5000 --name flask-container ${IMAGE_NAME}:${TAG}
                 '''
       }
     }
