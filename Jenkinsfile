@@ -8,7 +8,8 @@ pipeline{
   stages{
     stage("checkout"){
     steps{
-      git url: https://github.com/sai1919-git/flask-docker.git
+     git url: 'https://github.com/sai1919-git/flask-docker.git', branch: 'main'
+
     }
     }
     stage("build image"){
