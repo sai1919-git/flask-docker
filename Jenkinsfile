@@ -14,14 +14,16 @@ pipeline{
     }
     stage("build image"){
     steps {
-      docker.build ("$IMAGE_NAME:$TAG")
+      script{
+      dockerImage=docker.build ("$IMAGE_NAME:$TAG")
+    }
     }
     }
     stage("push image"){
       steps{
         script{
         docker.withRegistry('https://index.docker.io/v1',"${DOCKER_HUB}") {
-        docker.build("${IMAGE_NAME}:${TAG}").push()
+        dockerImage.push()
       }
         }
     }
